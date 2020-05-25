@@ -1,29 +1,56 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
-Vue.use(VueRouter)
+const TabBar = () => import('components/common/tabbar/TabBar')
+const TabBarItem = () => import('components/common/tabbar/TabBarItem')
+
+const Category = () => import('views/category/Category')
+const Home = () => import('views/Home/Home')
+const User = () => import('views/profile/User')
+const Shopcart = () => import('views/Shopcart/Shopcart');
+const Detail = () => import('views/detailpage/Detail')
+
+Vue.use(VueRouter);
 
   const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    {
+      path: '/',
+      redirect: '/Home'
+    },
+    {
+      path: '/Home',
+      component: Home
+    },
+    {
+      path: '/Category',
+      component: Category
+    },
+    {
+      path: '/Shopcart',
+      component: Shopcart
+    },
+    {
+      path: '/User',
+      component: User
+    },
+    {
+      path: '/TabBarItem',
+      component: TabBarItem
+    },
+    {
+      path: '/Detail/:iid',
+      component: Detail
+    },
+    {
+      path: 'TabBar',
+      component: TabBar
+    }
+  ];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
 export default router
